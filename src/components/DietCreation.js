@@ -29,16 +29,16 @@ const DietCreation = () => {
                     </LocalizationProvider>
                 {/* </Item> */}
             </Grid>
-            <Grid item lg={9} xl={9} md={7} sm={7} xs={6}>
+            <Grid item lg={8} xl={9} md={7} sm={7} xs={6}>
                 <TextField variant="outlined" label="Enter the diet" required className="components"></TextField>
             </Grid>
-            <Grid item xs={1}>
-                <IconButton aria-label="add-new-entry" className="crud-icons components">
+            <Grid item lg={1} xs={1} sm={1}>
+                <IconButton aria-label="add-new-entry" className="crud-icons">
                     <AddOutlined color="primary" fontSize="medium"/>
                 </IconButton>
             </Grid>
-            <Grid item xs={1}>
-                <IconButton aria-label="delete-entry" className="crud-icons components">
+            <Grid item lg={1} xs={1} sm={1}>
+                <IconButton aria-label="delete-entry" className="crud-icons">
                     <DeleteOutline color="error" fontSize="medium" />
                 </IconButton>
             </Grid>
