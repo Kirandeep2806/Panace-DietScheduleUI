@@ -27,7 +27,7 @@ const DietCreation = () => {
     }
 
     const deleteRow = (id) => {
-        console.log(id);
+        // console.log(id);
         setRows(rows.filter(obj => (obj.id !== id )))
     }
 
@@ -39,21 +39,32 @@ const DietCreation = () => {
                 break;
             }
         }
-        console.log(ind);
+        // console.log(ind);
         let cloneRows = [...rows];
         cloneRows[ind].diet = txt;
         setRows(cloneRows);
-        console.log(rows);
+        // console.log(rows);
     }
 
-    const addRow = () => {
+    const addRow = (id) => {
+        let ind = -1;
+        for(let i=0; i<rows.length; i++) {
+            if(rows[i].id === id) {
+                ind = i;
+                break;
+            }
+        }
+
         const newRow = {
             id: seq,
             time: new Date().toString(),
             diet: ""
         };
+
+        const cloneRows = [...rows];
+        cloneRows.splice(ind+1, 0, newRow);
         setSeq(seq + 1);
-        setRows([...rows, newRow]);
+        setRows(cloneRows);
     };
 
     return (
@@ -70,7 +81,7 @@ const DietCreation = () => {
                         <TextField aria-label="Enter the diet" variant="outlined" label="Enter the diet" required className="components" onChange={(e) => changeDiet(obj.id, e.target.value)}></TextField>
                     </Grid>
                     <Grid item lg={1} xl={1} xs={4} sm={3} md={2}>
-                        <IconButton aria-label="add-new-entry" className="crud-icons" onClick={() => addRow()}>
+                        <IconButton aria-label="add-new-entry" className="crud-icons" onClick={() => addRow(obj.id)}>
                             <AddOutlined color="primary" fontSize="medium"/>
                         </IconButton>
                         <IconButton aria-label="delete-entry" className="crud-icons delete" onClick={() => deleteRow(obj.id)} {...(rows.length<2 && {disabled:true})}>
