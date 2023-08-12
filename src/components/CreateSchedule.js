@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/CreateSchedule.scss";
 import DietCreation from "./DietCreation";
 import BottomCalendar from "./BottomCalendar";
 
