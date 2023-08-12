@@ -1,18 +1,14 @@
 import React from "react";
 import "../styles/CreateSchedule.scss";
-import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
-import { Tooltip, Fab } from "@mui/material";
-import Content from "./Content";
+import DietCreation from "./DietCreation";
+import BottomCalendar from "./BottomCalendar";
 
 export default function CreateSchedule() {
+
   return (
     <React.Fragment>
-      <Content />
-      <Tooltip title="Create Diet Plan">
-        <Fab color="success" aria-label="create-diet" sx={{ position: "fixed", bottom: 30, right: 30 }}>
-            <EditCalendarRoundedIcon />
-        </Fab>
-      </Tooltip>
+      <DietCreation />
+      <BottomCalendar />
     </React.Fragment>
   );
 }
