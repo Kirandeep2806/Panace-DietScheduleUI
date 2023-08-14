@@ -3,8 +3,9 @@ import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 import '../styles/DietCreation.scss';
-import { TextField, IconButton, Grid } from "@mui/material";
+import { TextField, IconButton, Grid, Tooltip, Fab } from "@mui/material";
 import { AddOutlined, DeleteOutline } from "@mui/icons-material";
+import SaveIcon from '@mui/icons-material/Save';
 
 const DietCreation = () => {
     const [time,setTime] = useState(new Date().toString());
@@ -90,6 +91,11 @@ const DietCreation = () => {
                     </Grid>
                 </Grid>
             ))}
+            <Tooltip title='Save Diet'>
+                <Fab color="success" sx={{ position: "fixed", bottom: 30, right: 110 }} >
+                    <SaveIcon />
+                </Fab>
+            </Tooltip>
         </div>
     )
 }
