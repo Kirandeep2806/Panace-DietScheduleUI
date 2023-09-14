@@ -166,11 +166,11 @@ const DietCreation = (props) => {
           <SaveIcon />
         </Fab>
       </Tooltip>
-      <Tooltip title="Logout" onClick={logOut}>
+      {/* <Tooltip title="Logout" onClick={logOut}>
         <Fab color="success" sx={{ position: "fixed", bottom: 10, right: 10 }}>
           <SaveIcon />
         </Fab>
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
 };
