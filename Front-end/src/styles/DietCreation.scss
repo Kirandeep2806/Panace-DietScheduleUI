@@ -1,0 +1,18 @@
+.diet-creation-container {
+    padding: 0.5rem 2rem;
+}
+
+.crud-icons {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    &.delete[disabled] {
+        &>svg {
+            fill: #e57373 !important;
+        }
+    }
+}
+
+.components {
+    width: 100%;
+}

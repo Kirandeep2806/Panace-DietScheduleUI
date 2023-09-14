@@ -1,0 +1,14 @@
+h3 {
+    text-transform: uppercase;
+}
+
+.home-div {
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../static/bg1.jpg");
+    background-repeat: no-repeat;
+    background-position: 70% -40%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
