@@ -15,7 +15,7 @@ export default function BottomCalendar(props) {
     const setAndClose = (date) => {
         setSelectedDate(date.$d.toString());
         console.log(date.$d.toDateString());
-        props.setDate(date.$d.toDateString()) ;
+        props.setDate(date.$d.toDateString());
         setOpen(false);
     }
 

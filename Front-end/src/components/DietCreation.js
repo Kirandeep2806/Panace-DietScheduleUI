@@ -10,6 +10,7 @@ import UserService from "../services/userServices";
 import authService from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Navbar from "./Navbar";
 
 const DietCreation = (props) => {
   const navigate = useNavigate();
@@ -114,63 +115,73 @@ const DietCreation = (props) => {
     setSeq(seq + 1);
     setRows(cloneRows);
   };
+  
+  const formatDate = () => {
+    const date = new Date(props.date);
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayName = daysOfWeek[date.getDay()];
+    return `${dayName} - ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+  }
 
   return (
-    <div style={{ margin: "1rem 0" }}>
-      <h1 style={{ textAlign: "center" }}>My Diet Schedule</h1>
-      {rows !== null &&
-        rows.map((obj) => (
-          <Grid
-            container
-            spacing={2}
-            className="diet-creation-container"
-            key={obj.id}
-          >
-            <Grid item lg={2} xl={2} md={3} sm={3} xs={3}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <TimePicker
-                  label="Enter Time"
-                  defaultValue={dayjs(obj.time)}
-                  onChange={(val) => handleTimeChange(val)}
+    <div>
+      <Navbar callLogOut={logOut} avatarAlpha={currentUser} />
+      <div style={{ margin: "1rem 0" }}>
+        <p style={{ textAlign: "center", fontSize: "2rem" }}>{formatDate()}</p>
+        {rows !== null &&
+          rows.map((obj) => (
+            <Grid
+              container
+              spacing={2}
+              className="diet-creation-container"
+              key={obj.id}
+            >
+              <Grid item lg={2} xl={2} md={3} sm={3} xs={3}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimePicker
+                    label="Enter Time"
+                    defaultValue={dayjs(obj.time)}
+                    onChange={(val) => handleTimeChange(val)}
+                    className="components"
+                  />
+                  {/* <p>{time}</p> */}
+                </LocalizationProvider>
+              </Grid>
+              <Grid item lg={9} xl={9} md={7} sm={6} xs={5}>
+                <TextField
+                  variant="outlined"
+                  required
                   className="components"
-                />
-                {/* <p>{time}</p> */}
-              </LocalizationProvider>
+                  value={obj.diet}
+                  onChange={(e) => changeDiet(obj.id, e.target.value)}
+                ></TextField>
+              </Grid>
+              <Grid item lg={1} xl={1} xs={4} sm={3} md={2}>
+                <IconButton className="crud-icons" onClick={() => addRow(obj.id)}>
+                  <AddOutlined color="primary" fontSize="medium" />
+                </IconButton>
+                <IconButton
+                  aria-label="delete-entry"
+                  className="crud-icons delete"
+                  onClick={() => deleteRow(obj.id)}
+                  {...(rows.length < 2 && { disabled: true })}
+                >
+                  <DeleteOutline color="error" fontSize="medium" />
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item lg={9} xl={9} md={7} sm={6} xs={5}>
-              <TextField
-                variant="outlined"
-                required
-                className="components"
-                value={obj.diet}
-                onChange={(e) => changeDiet(obj.id, e.target.value)}
-              ></TextField>
-            </Grid>
-            <Grid item lg={1} xl={1} xs={4} sm={3} md={2}>
-              <IconButton className="crud-icons" onClick={() => addRow(obj.id)}>
-                <AddOutlined color="primary" fontSize="medium" />
-              </IconButton>
-              <IconButton
-                aria-label="delete-entry"
-                className="crud-icons delete"
-                onClick={() => deleteRow(obj.id)}
-                {...(rows.length < 2 && { disabled: true })}
-              >
-                <DeleteOutline color="error" fontSize="medium" />
-              </IconButton>
-            </Grid>
-          </Grid>
-        ))}
-      <Tooltip title="Save Diet" onClick={saveDiet}>
-        <Fab color="success" sx={{ position: "fixed", bottom: 30, right: 110 }}>
-          <SaveIcon />
-        </Fab>
-      </Tooltip>
-      {/* <Tooltip title="Logout" onClick={logOut}>
-        <Fab color="success" sx={{ position: "fixed", bottom: 10, right: 10 }}>
-          <SaveIcon />
-        </Fab>
-      </Tooltip> */}
+          ))}
+        <Tooltip title="Save Diet" onClick={saveDiet}>
+          <Fab color="success" sx={{ position: "fixed", bottom: 30, right: 110 }}>
+            <SaveIcon />
+          </Fab>
+        </Tooltip>
+        {/* <Tooltip title="Logout" onClick={logOut}>
+          <Fab color="success" sx={{ position: "fixed", bottom: 10, right: 10 }}>
+            <SaveIcon />
+          </Fab>
+        </Tooltip> */}
+      </div>
     </div>
   );
 };
